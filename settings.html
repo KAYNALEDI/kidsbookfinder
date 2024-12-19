@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KidsBookFinder - Find Perfect Books for Young Readers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Comic+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/settings.css">
+    
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">KidsBookFinder</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="findbook.html">Find Books</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+                <li><a href="settings.html" class="active">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="settings-container">
+        <h1>Settings</h1>
+        
+        <section class="settings-section">
+            <h2>Theme Settings</h2>
+            <div class="theme-options">
+                <div class="theme-option" data-theme="default">
+                    <div class="theme-preview default-theme"></div>
+                    <span>Default Theme</span>
+                </div>
+                <div class="theme-option" data-theme="ocean">
+                    <div class="theme-preview ocean-theme"></div>
+                    <span>Ocean Theme</span>
+                </div>
+                <div class="theme-option" data-theme="forest">
+                    <div class="theme-preview forest-theme"></div>
+                    <span>Forest Theme</span>
+                </div>
+                <div class="theme-option" data-theme="sunset">
+                    <div class="theme-preview sunset-theme"></div>
+                    <span>Sunset Theme</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="settings-section">
+            <h2>Font Size</h2>
+            <div class="font-size-settings">
+                <button class="font-size-btn" data-size="small">Small</button>
+                <button class="font-size-btn" data-size="medium">Medium</button>
+                <button class="font-size-btn" data-size="large">Large</button>
+            </div>
+        </section>
+
+        <section class="settings-section">
+            <h2>Animation Settings</h2>
+            <div class="toggle-setting">
+                <label class="switch">
+                    <input type="checkbox" id="animationToggle" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span>Enable Animations</span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: hello@kidsbookfinder.com</p>
+                <p>Follow us on social media</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 KidsBookFinder. All rights reserved.</p>
+        </div>
+    </footer>
+
+    
+
+    <script type="module" src="js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KidsBookFinder - User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Comic+Neue&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">KidsBookFinder</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="findbook.html">Find Books</a></li>
+                <li><a href="login.html" class="active">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="profile-container">
+        <!-- Authentication Forms Section -->
+        <section id="authForms" class="auth-section">
+            <!-- Login Form -->
+            <div class="auth-form-container">
+                <form id="loginForm" class="auth-form">
+                    <h2>Login to Your Account</h2>
+                    <div class="form-group">
+                        <label for="loginUsername">Username</label>
+                        <input 
+                            type="text" 
+                            id="loginUsername" 
+                            name="username" 
+                            required
+                            placeholder="Enter your username"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input 
+                            type="password" 
+                            id="loginPassword" 
+                            name="password" 
+                            required
+                            placeholder="Enter your password"
+                        >
+                    </div>
+                    <button type="submit" class="auth-button">Login</button>
+                    <p class="auth-switch">Don't have an account? <a href="#" id="showRegister">Register</a></p>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div class="auth-form-container">
+                <form id="registerForm" class="auth-form hidden">
+                    <h2>Create New Account</h2>
+                    <div class="form-group">
+                        <label for="registerUsername">Username</label>
+                        <input 
+                            type="text" 
+                            id="registerUsername" 
+                            name="username" 
+                            required
+                            placeholder="Choose a username"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input 
+                            type="password" 
+                            id="registerPassword" 
+                            name="password" 
+                            required
+                            placeholder="Choose a password"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <select id="age" name="age" required>
+                            <option value="">Select age range</option>
+                            <option value="5-7">5-7 years</option>
+                            <option value="8-10">8-10 years</option>
+                            <option value="11-13">11-13 years</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="readingLevel">Reading Level</label>
+                        <select id="readingLevel" name="readingLevel" required>
+                            <option value="">Select reading level</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Interests</label>
+                        <div class="interests-grid">
+                            <label class="interest-checkbox">
+                                <input type="checkbox" name="interests" value="adventure">
+                                Adventure
+                            </label>
+                            <label class="interest-checkbox">
+                                <input type="checkbox" name="interests" value="fantasy">
+                                Fantasy
+                            </label>
+                            <label class="interest-checkbox">
+                                <input type="checkbox" name="interests" value="science">
+                                Science
+                            </label>
+                            <label class="interest-checkbox">
+                                <input type="checkbox" name="interests" value="animals">
+                                Animals
+                            </label>
+                            <label class="interest-checkbox">
+                                <input type="checkbox" name="interests" value="history">
+                                History
+                            </label>
+                            <label class="interest-checkbox">
+                                <input type="checkbox" name="interests" value="mystery">
+                                Mystery
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="auth-button">Register</button>
+                    <p class="auth-switch">Already have an account? <a href="#" id="showLogin">Login</a></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- User Dashboard Section -->
+        <section id="userDashboard" class="user-dashboard hidden">
+            <div class="dashboard-header">
+                <h2>Welcome Back, <span id="displayUsername"></span>!</h2>
+                <div class="user-actions">
+                    <button id="logoutBtn" class="logout-button">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+            
+            <div class="dashboard-content">
+                <div class="user-info-card">
+                    <div class="profile-section">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="profile-details">
+                            <h3>Profile Information</h3>
+                            <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+                            <p><strong>Age Range:</strong> <span id="profileAge"></span></p>
+                            <p><strong>Reading Level:</strong> <span id="profileReadingLevel"></span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="interests-section">
+                        <h3>Your Interests</h3>
+                        <div id="userInterests" class="interest-tags"></div>
+                    </div>
+                </div>
+
+                <div class="reading-history">
+                    <h3>Reading History</h3>
+                    <div id="readingList" class="reading-list">
+                        <!-- Reading history will be populated here -->
+                    </div>
+                </div>
+
+                <div class="recommendations">
+                    <h3>Recommended Books</h3>
+                    <div id="recommendedBooks" class="books-grid">
+                        <!-- Recommendations will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Message Container -->
+        <div id="errorContainer" class="error-container hidden">
+            <p id="errorMessage"></p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: hello@kidsbookfinder.com</p>
+                <p>Follow us on social media</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 KidsBookFinder. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+</html>

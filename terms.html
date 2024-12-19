@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Use - KidsBookFinder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Comic+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+   `
+    <header>
+        <nav class="main-nav">
+            <div class="logo">KidsBookFinder</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="findbook.html">Find Books</a></li>
+                <li><a href="login.html">Login</a></li>
+              <!--  <li><a href="settings.html">Settings</a></li>--> 
+            </ul>
+        </nav>
+    </header>
+
+    <main class="terms-container">
+        <section class="terms-header">
+            <h1>Terms and Conditions</h1>
+            <p class="last-updated">Last Updated: January 2024</p>
+        </section>
+
+        <section class="terms-content">
+            <div class="terms-section">
+                <h2>1. Acceptance of Terms</h2>
+                <p>By using KidsBookFinder, you agree to these terms. If you're under 13, you need a parent or guardian's permission to use our service.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2>2. User Accounts</h2>
+                <ul>
+                    <li>You must provide accurate information when creating an account</li>
+                    <li>Keep your password secure</li>
+                    <li>One account per user</li>
+                    <li>Parents/guardians are responsible for monitoring their child's account</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>3. Privacy and Safety</h2>
+                <ul>
+                    <li>We protect your personal information</li>
+                    <li>Never share personal details in public areas</li>
+                    <li>Parent/guardian consent required for users under 13</li>
+                    <li>See our <a href="privacy.html">Privacy Policy</a> for more details</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>4. Using Our Service</h2>
+                <ul>
+                    <li>Use the service for finding and tracking books</li>
+                    <li>Don't misuse or try to damage the service</li>
+                    <li>Follow our community guidelines</li>
+                    <li>Report inappropriate content</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>5. Content Guidelines</h2>
+                <ul>
+                    <li>Be respectful in reviews and comments</li>
+                    <li>Don't post inappropriate or harmful content</li>
+                    <li>Don't share copyrighted material without permission</li>
+                    <li>We may remove content that violates these terms</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>6. Changes to Service</h2>
+                <ul>
+                    <li>We may update or change our service</li>
+                    <li>We'll notify users of significant changes</li>
+                    <li>Continued use means you accept any changes</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>7. Account Termination</h2>
+                <ul>
+                    <li>You can delete your account at any time</li>
+                    <li>We may suspend accounts that violate these terms</li>
+                    <li>Parent/guardian can request account deletion</li>
+                </ul>
+            </div>
+
+            <div class="terms-section contact-info">
+                <h2>8. Contact Us</h2>
+                <p>If you have questions about these terms:</p>
+                <div class="contact-buttons">
+                    <button class="contact-btn" id="emailSupportBtn">
+                        <i class="fas fa-envelope"></i>
+                        Email Us
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="terms-footer">
+            <div class="agreement-box">
+                <p>By using KidsBookFinder, you agree to these terms and conditions.</p>
+                <p>Parent(s) or guardian(s) agreement is required for users under the age of 13.</p>
+            </div>
+        </section>
+    </main>
+
+    
+    <div class="modal" id="emailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Contact Support</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            <form id="supportForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" required>
+                        <option value="">Select a topic</option>
+                        <option value="account">Account Help</option>
+                        <option value="technical">Technical Issue</option>
+                        <option value="suggestion">Suggestion</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: hello@kidsbookfinder.com</p>
+                <p>Follow us on social media</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 KidsBookFinder. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/support.js"></script>
+</body>
+</html>

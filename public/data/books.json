@@ -1,0 +1,160 @@
+{
+    "items": [
+        {
+            "id": "fallback1",
+            "volumeInfo": {
+                "title": "The Magic Tree House",
+                "authors": ["Mary Pope Osborne"],
+                "description": "Jack and Annie discover a mysterious tree house filled with books that sends them on magical adventures through time and space.",
+                "imageLinks": {
+                    "thumbnail": "/images/fallback-cover-1.jpg"
+                },
+                "categories": ["Juvenile Fiction", "Adventure"],
+                "ageGroup": "6-8"
+            }
+        },
+        {
+            "id": "fallback2",
+            "volumeInfo": {
+                "title": "Where the Wild Things Are",
+                "authors": ["Maurice Sendak"],
+                "description": "A young boy named Max enters a fantastic world of monsters after being sent to bed without dinner.",
+                "imageLinks": {
+                    "thumbnail": "/images/fallback-cover-2.jpg"
+                },
+                "categories": ["Picture Books", "Fantasy"],
+                "ageGroup": "4-8"
+            }
+        },
+        {
+            "id": "fallback3",
+            "volumeInfo": {
+                "title": "Charlotte's Web",
+                "authors": ["E.B. White"],
+                "description": "A beautiful story of friendship between a pig named Wilbur and a spider named Charlotte.",
+                "imageLinks": {
+                    "thumbnail": "/images/fallback-cover-3.jpg"
+                },
+                "categories": ["Juvenile Fiction", "Animals"],
+                "ageGroup": "8-12"
+            }
+        },
+        {
+            "id": "fallback4",
+            "volumeInfo": {
+                "title": "Percy Jackson & The Lightning Thief",
+                "authors": ["Rick Riordan"],
+                "description": "A young demigod discovers his heritage and embarks on a quest to prevent a war between the gods.",
+                "imageLinks": {
+                    "thumbnail": "/images/fallback-cover-4.jpg"
+                },
+                "categories": ["Young Adult", "Fantasy", "Mythology"],
+                "ageGroup": "10-14"
+            }
+        },
+        {
+            "id": "fallback5",
+            "volumeInfo": {
+                "title": "Goodnight Moon",
+                "authors": ["Margaret Wise Brown"],
+                "description": "A gentle bedtime story that has lulled generations of children to sleep.",
+                "imageLinks": {
+                    "thumbnail": "/images/fallback-cover-5.jpg"
+                },
+                "categories": ["Picture Books", "Bedtime Stories"],
+                "ageGroup": "2-5"
+            }
+        },
+        {
+            "id": "fallback6",
+            "volumeInfo": {
+                "title": "Wonder",
+                "authors": ["R.J. Palacio"],
+                "description": "A heartwarming story about a boy with facial differences attending school for the first time.",
+                "imageLinks": {
+                    "thumbnail": "/images/fallback-cover-6.jpg"
+                },
+                "categories": ["Realistic Fiction", "Social Issues"],
+                "ageGroup": "9-12"
+            }
+        },
+        {
+            "id": "fallback7",
+            "volumeInfo": {
+                "title": "The Very Hungry Caterpillar",
+                "authors": ["Eric Carle"],
+                "description": "Follow the journey of a tiny caterpillar as he eats his way through various foods before becoming a beautiful butterfly.",
+                "imageLinks": {
+                    "thumbnail": "/images/fallback-cover-7.jpg"
+                },
+                "categories": ["Picture Books", "Educational"],
+                "ageGroup": "2-5"
+            }
+        },
+        {
+            "id": "fallback8",
+            "volumeInfo": {
+                "title": "Bridge to Terabithia",
+                "authors": ["Katherine Paterson"],
+                "description": "A touching story of friendship and imagination between two fifth graders who create a magical forest kingdom.",
+                "imageLinks": {
+                    "thumbnail": "/images/fallback-cover-8.jpg"
+                },
+                "categories": ["Juvenile Fiction", "Friendship"],
+                "ageGroup": "9-12"
+            }
+        },
+        {
+            "id": "fallback9",
+            "volumeInfo": {
+                "title": "The Gruffalo",
+                "authors": ["Julia Donaldson"],
+                "description": "A clever mouse takes a walk through the woods, using his wits to deter potential predators.",
+                "imageLinks": {
+                    "thumbnail": "/images/fallback-cover-9.jpg"
+                },
+                "categories": ["Picture Books", "Adventure"],
+                "ageGroup": "3-7"
+            }
+        },
+        {
+            "id": "fallback10",
+            "volumeInfo": {
+                "title": "Matilda",
+                "authors": ["Roald Dahl"],
+                "description": "A gifted young girl with special powers stands up against bullying adults and helps her teacher take back her school.",
+                "imageLinks": {
+                    "thumbnail": "/images/fallback-cover-10.jpg"
+                },
+                "categories": ["Juvenile Fiction", "Fantasy"],
+                "ageGroup": "8-12"
+            }
+        },
+        {
+            "id": "fallback11",
+            "volumeInfo": {
+                "title": "The One and Only Ivan",
+                "authors": ["Katherine Applegate"],
+                "description": "Based on a true story of a gorilla who lived in a mall, this touching tale explores friendship, art, and hope.",
+                "imageLinks": {
+                    "thumbnail": "/images/fallback-cover-11.jpg"
+                },
+                "categories": ["Animal Stories", "Social Issues"],
+                "ageGroup": "8-12"
+            }
+        },
+        {
+            "id": "fallback12",
+            "volumeInfo": {
+                "title": "Dragons Love Tacos",
+                "authors": ["Adam Rubin"],
+                "description": "A humorous story about dragons who love tacos but must avoid spicy salsa at all costs.",
+                "imageLinks": {
+                    "thumbnail": "/images/fallback-cover-12.jpg"
+                },
+                "categories": ["Picture Books", "Humor"],
+                "ageGroup": "3-7"
+            }
+        }
+    ]
+}
