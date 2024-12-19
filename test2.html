@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KidsBookFinder - Find Perfect Books for Young Readers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Comic+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .age-filter {
+            margin: 20px;
+            text-align: center;
+        }
+        .age-btn {
+            margin: 5px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .age-btn.active {
+            background-color: #2E7D32;
+            transform: scale(1.05);
+        }
+        .age-btn:hover {
+            opacity: 0.9;
+        }
+        .suggestion-btn {
+            margin: 5px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+        }
+        #suggestions {
+            margin: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .book {
+            background: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            width: 300px;
+        }
+        .book:hover {
+            transform: translateY(-5px);
+        }
+        .book img {
+            max-width: 150px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        #searchResult {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">KidsBookFinder</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html">About</a></li>
+                <li><a href="findbook.html" class="active">Find Books</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="search-container">
+        <h1 class="text-center mb-1">Find Your Perfect Book! 📚</h1>
+        <div id="search">
+            <form id="bookForm">
+                <label for="bookSearch">Search for a book!</label>
+                <input type="search" id="bookSearch" name="bookSearch" placeholder="Enter book title or click suggestions below">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="age-filter">
+            <h3>Filter by Age Range:</h3>
+            <button class="age-btn" data-age="0-3">Ages 0-3</button>
+            <button class="age-btn" data-age="4-6">Ages 4-6</button>
+            <button class="age-btn" data-age="7-9">Ages 7-9</button>
+            <button class="age-btn" data-age="10-12">Ages 10-12</button>
+            <button class="age-btn" data-age="all">All Ages</button>
+        </div>
+
+        <div id="suggestions">
+            <h3>Popular Children's Books:</h3>
+            <div id="suggestionButtons"></div>
+        </div>
+
+        <div id="searchResult"></div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: hello@kidsbookfinder.com</p>
+                <p>Follow us on social media</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 KidsBookFinder. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let selectedAgeRange = 'all';
+
+            // Popular children's book suggestions
+            const popularBooks = [
+                "Where the Wild Things Are",
+                "The Very Hungry Caterpillar",
+                "Goodnight Moon",
+                "Charlotte's Web",
+                "The Cat in the Hat",
+                "Harry Potter",
+                "Percy Jackson",
+                "Diary of a Wimpy Kid"
+            ];
+
+            // Age range categories
+            const ageRanges = {
+                '0-3': ['baby', 'toddler', 'board book'],
+                '4-6': ['picture book', 'early reader', 'kindergarten'],
+                '7-9': ['chapter book', 'elementary', 'middle grade'],
+                '10-12': ['middle grade', 'young reader', 'preteen']
+            };
+
+            // Add suggestion buttons
+            popularBooks.forEach(book => {
+                const button = $('<button>')
+                    .text(book)
+                    .addClass('suggestion-btn')
+                    .click(function() {
+                        $('#bookSearch').val(book);
+                        $('#bookForm').submit();
+                    });
+                $('#suggestionButtons').append(button);
+            });
+
+            // Age filter buttons
+            $('.age-btn').click(function() {
+                $('.age-btn').removeClass('active');
+                $(this).addClass('active');
+                selectedAgeRange = $(this).data('age');
+                
+                const searchTerm = $('#bookSearch').val();
+                if (searchTerm) {
+                    searchBooks(searchTerm);
+                }
+            });
+
+            function matchesAgeRange(book, ageRange) {
+                if (ageRange === 'all') return true;
+
+                const description = (book.volumeInfo.description || '').toLowerCase();
+                const categories = (book.volumeInfo.categories || []).join(' ').toLowerCase();
+                const title = (book.volumeInfo.title || '').toLowerCase();
+                
+                return ageRanges[ageRange].some(term => 
+                    description.includes(term) || 
+                    categories.includes(term) || 
+                    title.includes(term)
+                );
+            }
+
+            function searchBooks(searchTerm) {
+                $('#searchResult').empty().append('<p>Searching...</p>');
+                
+                $.ajax({
+                    url: `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchTerm)}+subject:juvenile&maxResults=40`,
+                    method: 'GET',
+                    success: function(response) {
+                        $('#searchResult').empty();
+                        
+                        if(response.items && response.items.length > 0) {
+                            const filteredBooks = response.items.filter(book => {
+                                const categories = book.volumeInfo.categories || [];
+                                const maturityRating = book.volumeInfo.maturityRating || '';
+                                const isChildrensBook = categories.some(category => 
+                                    category.toLowerCase().includes('juvenile') ||
+                                    category.toLowerCase().includes('children') ||
+                                    category.toLowerCase().includes('young')
+                                ) || maturityRating === 'NOT_MATURE';
+
+                                return isChildrensBook && matchesAgeRange(book, selectedAgeRange);
+                            });
+
+                            if(filteredBooks.length > 0) {
+                                filteredBooks.forEach(function(book) {
+                                    const volumeInfo = book.volumeInfo;
+                                    const bookElement = $('<div class="book">');
+                                    
+                                    if(volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail) {
+                                        const secureUrl = volumeInfo.imageLinks.thumbnail.replace('http:', 'https:');
+                                        bookElement.append(`<img src="${secureUrl}" alt="Book cover">`);
+                                    }
+
+                                    bookElement.append(`<h3>${volumeInfo.title}</h3>`);
+                                    
+                                    if(volumeInfo.authors) {
+                                        bookElement.append(`<p><strong>By:</strong> ${volumeInfo.authors.join(', ')}</p>`);
+                                    }
+                                    
+                                    if(volumeInfo.categories) {
+                                        bookElement.append(`<p><strong>Category:</strong> ${volumeInfo.categories.join(', ')}</p>`);
+                                    }
+                                    
+                                    if(volumeInfo.description) {
+                                        bookElement.append(`<p>${volumeInfo.description.substring(0, 150)}...</p>`);
+                                    }
+                                    
+                                    $('#searchResult').append(bookElement);
+                                });
+                            } else {
+                                $('#searchResult').append('<p>No books found for this age range. Try another search or age filter!</p>');
+                            }
+                        } else {
+                            $('#searchResult').append('<p>No books found. Try another search!</p>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        $('#searchResult').empty()
+                            .append('<p>Error fetching books. Please try again.</p>');
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
+            $('#bookForm').submit(function(e) {
+                e.preventDefault();
+                const value = $('#bookSearch').val();
+                
+                if(value === '') {
+                    alert('Please enter a search term or click one of the suggestions!');
+                } else {
+                    searchBooks(value);
+                }
+            });
+        });
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    $(document).ready(function() {
+        let selectedAgeRange = 'all';
+
+        // Popular children's book suggestions
+        const popularBooks = [
+            "Where the Wild Things Are",
+            "The Very Hungry Caterpillar",
+            "Goodnight Moon",
+            "Charlotte's Web",
+            "The Cat in the Hat",
+            "Harry Potter",
+            "Percy Jackson",
+            "Diary of a Wimpy Kid"
+        ];
+
+        // Age range categories with expanded keywords
+        const ageRanges = {
+            '0-3': ['baby', 'toddler', 'board book', 'infant', 'bedtime', 'first words', 'nursery'],
+            '4-6': ['picture book', 'early reader', 'kindergarten', 'preschool', 'beginning reader'],
+            '7-9': ['chapter book', 'elementary', 'early chapter', 'beginning chapter', 'third grade', 'fourth grade'],
+            '10-12': ['middle grade', 'young reader', 'preteen', 'fifth grade', 'sixth grade', 'tween']
+        };
+
+        // Clear existing suggestion buttons and add new ones
+        $('#suggestionButtons').empty();
+        popularBooks.forEach(book => {
+            const button = $('<button>')
+                .text(book)
+                .addClass('suggestion-btn')
+                .click(function(e) {
+                    e.preventDefault();
+                    $('#bookSearch').val(book);
+                    searchBooks(book);
+                });
+            $('#suggestionButtons').append(button);
+        });
+
+        // Age filter buttons
+        $('.age-btn').click(function(e) {
+            e.preventDefault();
+            $('.age-btn').removeClass('active');
+            $(this).addClass('active');
+            selectedAgeRange = $(this).data('age');
+            
+            const searchTerm = $('#bookSearch').val();
+            if (searchTerm) {
+                searchBooks(searchTerm);
+            }
+        });
+
+        function matchesAgeRange(book, ageRange) {
+            if (ageRange === 'all') return true;
+
+            const description = (book.volumeInfo.description || '').toLowerCase();
+            const categories = (book.volumeInfo.categories || []).join(' ').toLowerCase();
+            const title = (book.volumeInfo.title || '').toLowerCase();
+            
+            // Check if any age range keywords match
+            return ageRanges[ageRange].some(term => 
+                description.includes(term) || 
+                categories.includes(term) || 
+                title.includes(term)
+            );
+        }
+
+        function searchBooks(searchTerm) {
+            $('#searchResult').empty().append('<p>Searching...</p>');
+            
+            $.ajax({
+                url: `https://www.googleapis.com/books/v1/volumes`,
+                method: 'GET',
+                data: {
+                    q: `${encodeURIComponent(searchTerm)}+subject:juvenile`,
+                    maxResults: 40,
+                    key: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' // Add your API key here
+                },
+                success: function(response) {
+                    $('#searchResult').empty();
+                    
+                    if(response.items && response.items.length > 0) {
+                        const filteredBooks = response.items.filter(book => {
+                            const categories = book.volumeInfo.categories || [];
+                            const maturityRating = book.volumeInfo.maturityRating || '';
+                            const isChildrensBook = categories.some(category => 
+                                category.toLowerCase().includes('juvenile') ||
+                                category.toLowerCase().includes('children') ||
+                                category.toLowerCase().includes('young')
+                            ) || maturityRating === 'NOT_MATURE';
+
+                            return isChildrensBook && matchesAgeRange(book, selectedAgeRange);
+                        });
+
+                        if(filteredBooks.length > 0) {
+                            filteredBooks.forEach(function(book) {
+                                const volumeInfo = book.volumeInfo;
+                                const bookElement = $('<div class="book">');
+                                
+                                // Add thumbnail if available
+                                if(volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail) {
+                                    const secureUrl = volumeInfo.imageLinks.thumbnail.replace('http:', 'https:');
+                                    bookElement.append(`<img src="${secureUrl}" alt="Book cover">`);
+                                }
+
+                                // Add title
+                                bookElement.append(`<h3>${volumeInfo.title}</h3>`);
+                                
+                                // Add author if available
+                                if(volumeInfo.authors) {
+                                    bookElement.append(`<p><strong>By:</strong> ${volumeInfo.authors.join(', ')}</p>`);
+                                }
+                                
+                                // Add categories if available
+                                if(volumeInfo.categories) {
+                                    bookElement.append(`<p><strong>Category:</strong> ${volumeInfo.categories.join(', ')}</p>`);
+                                }
+                                
+                                // Add description if available
+                                if(volumeInfo.description) {
+                                    bookElement.append(`<p>${volumeInfo.description.substring(0, 150)}...</p>`);
+                                }
+                                
+                                $('#searchResult').append(bookElement);
+                            });
+                        } else {
+                            $('#searchResult').append('<p>No books found for this age range. Try another search or age filter!</p>');
+                        }
+                    } else {
+                        $('#searchResult').append('<p>No books found. Try another search!</p>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#searchResult').empty()
+                        .append('<p>Error fetching books. Please try again.</p>');
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+        // Form submission handler
+        $('#bookForm').on('submit', function(e) {
+            e.preventDefault();
+            const value = $('#bookSearch').val().trim();
+            
+            if(value === '') {
+                alert('Please enter a search term or click one of the suggestions!');
+            } else {
+                searchBooks(value);
+            }
+        });
+
+        // Set "All Ages" as default active filter
+        $('.age-btn[data-age="all"]').addClass('active');
+    });
+
+
+    </script>
+</body>
+</html>

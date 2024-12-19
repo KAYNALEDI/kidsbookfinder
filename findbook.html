@@ -21,120 +21,105 @@
             </ul>
         </nav>
     </header>
+    
 
-    <div class="search-container">
-        <h1 class="text-center mb-1">Find Your Perfect Book! 📚</h1>
-
-        <!-- Search Form -->
-        <form id="bookSearchForm" class="search-form">
-            <div class="search-controls">
-                <div class="form-group">
-                    <label for="searchInput">Search Books</label>
-                    <input 
-                        type="text" 
-                        id="searchInput" 
-                        placeholder="Enter book title, author, or keyword"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="age">Age Range</label>
-                    <select id="age" required>
-                        <option value="">Select Age Range</option>
-                        <option value="5-7">5-7 years</option>
-                        <option value="8-10">8-10 years</option>
-                        <option value="11-13">11-13 years</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="interests">Interests</label>
-                    <select id="interests" multiple>
-                        <option value="adventure">Adventure</option>
-                        <option value="fantasy">Fantasy & Magic</option>
-                        <option value="animals">Animals</option>
-                        <option value="science">Science & Nature</option>
-                        <option value="mystery">Mystery</option>
-                        <option value="fairytales">Fairy Tales</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="search-button">Find Books! 🔍</button>
-            </div>
+    <main>
+        <div class="search-container">
+            <h1 class="text-center mb-1">Find Your Perfect Book! 📚</h1>
+    <div id="search">
+        <form id="bookForm">
+            <label for="bookSearch">Search for a book!</label>
+            <input type="search" id="bookSearch" name="bookSearch">
+            <button type="submit">Search</button>
         </form>
-
-        <!-- Loading Spinner -->
-        <div id="loading" class="loading-spinner hidden">
-            <div class="spinner"></div>
-        </div>
-
-        <!-- Error Message -->
-        <div id="error" class="error-message hidden"></div>
-
-        <!-- Results Container -->
-        <div id="results" class="results-container">
-            <div class="books-grid">
-                <!-- Books will be dynamically inserted here -->
-            </div>
-        </div>
-
-        <!-- Recommendations Section -->
-        <div id="recommendations" class="recommendations-section hidden">
-            <h2>Recommended Books</h2>
-            <div class="recommended-books-grid">
-                <!-- Recommended books will be dynamically inserted here -->
-            </div>
-        </div>
     </div>
 
-    <!-- Book Details Modal -->
-    <div id="bookModal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <div id="bookDetails"></div>
+    <div id="searchResult"></div>
+</div>
+</main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#bookForm').submit(function(e) {
+                e.preventDefault(); // Prevent form from submitting normally
+                
+                const value = $('#bookSearch').val(); // Correct selector with #
+                
+                if(value === '') {
+                    alert('Please enter a search term');
+                } else {
+                    // Clear previous results
+                    $('#searchResult').empty();
+                    
+                    $.ajax({
+                        url: `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(value)}`,
+                        method: 'GET',
+                        success: function(response) {
+                            if(response.items && response.items.length > 0) {
+                                response.items.forEach(function(book) {
+                                    const volumeInfo = book.volumeInfo;
+                                    const bookElement = $('<div class="book">');
+                                    
+                                    // Add title
+                                    bookElement.append(`<h3>${volumeInfo.title}</h3>`);
+                                    
+                                    // Add author if available
+                                    if(volumeInfo.authors) {
+                                        bookElement.append(`<p>By: ${volumeInfo.authors.join(', ')}</p>`);
+                                    }
+                                    
+                                    // Add thumbnail if available
+                                    if(volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail) {
+                                        bookElement.append(`<img src="${volumeInfo.imageLinks.thumbnail}" alt="Book cover">`);
+                                    }
+                                    
+                                    // Add description if available
+                                    if(volumeInfo.description) {
+                                        bookElement.append(`<p>${volumeInfo.description.substring(0, 200)}...</p>`);
+                                    }
+                                    
+                                    $('#searchResult').append(bookElement);
+                                });
+                            } else {
+                                $('#searchResult').append('<p>No books found</p>');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            $('#searchResult').append('<p>Error fetching books. Please try again.</p>');
+                            console.error('Error:', error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+   
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Contact Us</h4>
+            <p>Email: hello@kidsbookfinder.com</p>
+            <p>Follow us on social media</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Use</a></li>
+            </ul>
         </div>
     </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 KidsBookFinder. All rights reserved.</p>
+    </div>
+</footer>
 
-    <!-- Book Card Template -->
-    <template id="bookCardTemplate">
-        <div class="book-card">
-            <img class="book-cover" src="" alt="">
-            <div class="book-info">
-                <h3 class="book-title"></h3>
-                <p class="book-author"></p>
-                <p class="book-description"></p>
-                <button class="details-button">More Details</button>
-                <button class="favorite-button" aria-label="Add to favorites">
-                    <i class="far fa-heart"></i>
-                </button>
-            </div>
-        </div>
-    </template>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Contact Us</h4>
-                <p>Email: hello@kidsbookfinder.com</p>
-                <p>Follow us on social media</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Use</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 KidsBookFinder. All rights reserved.</p>
-        </div>
-    </footer>
 
-    <!-- Add this before closing body tag -->
-    <script src="js/app.js" type="module"></script>
+<script src="js/app.js" type="module"></script>
 </body>
 </html>
